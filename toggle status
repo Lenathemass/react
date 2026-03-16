@@ -1,0 +1,21 @@
+import { useState } from "react";
+
+function StatusToggle() {
+  const [status, setStatus] = useState(true);
+
+  const toggleStatus = () => {
+    setStatus(!status);
+  };
+
+  return (
+    <div>
+      <h2>Status: {status ? "Online" : "Offline"}</h2>
+
+      <button onClick={toggleStatus}>
+        Toggle Status
+      </button>
+    </div>
+  );
+}
+
+export default StatusToggle;
