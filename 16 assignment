@@ -1,0 +1,124 @@
+main.jsx
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+app.jsx
+
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import DashboardLayout from "./pages/DashboardLayout";
+import DashboardHome from "./pages/DashboardHome";
+import Profile from "./pages/Profile";
+
+function App() {
+  return (
+    <Routes>
+
+      
+      <Route path="/" element={<Login />} />
+<Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<DashboardHome />} />
+        <Route path="profile" element={<Profile />} />
+
+      </Route>
+
+    </Routes>
+  );
+}
+
+export default App;
+
+
+
+login.jsx
+
+import { useNavigate, useLocation } from "react-router-dom";
+
+function Login() {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogin = () => {
+    navigate("/dashboard");
+  };
+
+  return (
+    <div>
+
+      <h2>Login Page</h2>
+
+      <p>Current Path: {location.pathname}</p>
+
+      <button onClick={handleLogin}>
+        Login
+      </button>
+
+    </div>
+  );
+}
+
+export default Login;
+
+dashboard.jsx
+
+import { Link, Outlet } from "react-router-dom";
+
+function DashboardLayout() {
+  return (
+    <div>
+
+      <h2>Dashboard</h2>
+
+      <nav>
+        <Link to="/dashboard">Home</Link> |
+        <Link to="/dashboard/profile">Profile</Link>
+      </nav>
+
+      <hr />
+
+      {/* Child Routes Render Here */}
+      <Outlet />
+
+    </div>
+  );
+}
+
+export default DashboardLayout;
+
+
+
+dashboardhome.jsx
+
+function DashboardHome() {
+  return (
+    <div>
+      <h3>Dashboard Home</h3>
+      <p>Welcome to the Dashboard</p>
+    </div>
+  );
+}
+
+export default DashboardHome;
+
+profile.jsx
+
+function Profile() {
+  return (
+    <div>
+      <h3>Profile Page</h3>
+      <p>This is the user profile.</p>
+    </div>
+  );
+}
+
+export default Profile;
